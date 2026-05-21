@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Men&uacute; restaurante</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="min-h-screen font-[Outfit,Segoe_UI,Tahoma,Geneva,Verdana,sans-serif] text-[#222] bg-linear-to-br from-[#e3eafe] via-[#f9eec0] to-[#e3eafe] relative overflow-x-hidden">
+  <main class="py-8 px-2 sm:py-16 sm:px-4 flex flex-col items-center relative z-10">
+
+    <h1 class="text-center text-2xl sm:text-4xl font-bold mb-4 tracking-tight leading-tight text-[#5a3ec8] drop-shadow-[0_2px_8px_rgba(0,0,0,0.15)] max-w-[900px] mx-auto">
+      Restaurante Montblanc — Menú del día
+    </h1>
+    <p class="mx-auto max-w-2xl text-center text-base sm:text-lg font-normal text-[#5a3ec8]">
+      6. Crea un programa que muestra el menú de un restaurante y permite al usuario seleccionar un plato e indicar sus preferencias e intolerancias, avisando de incompatibilidades.
+    </p>
+
+
+
+    <section class="mt-10 mx-auto w-full max-w-2xl bg-white/90 shadow-xl backdrop-blur-md rounded-3xl border border-[#b4b4c8]/20 px-8 py-10 flex flex-col items-center text-center">
+
+      <h2 class="font-semibold text-2xl mb-2 text-[#5a3ec8]">Menú del día</h2>
+
+      <!-- Vista previa del plato -->
+      <div class="mt-3 min-[320px]:mt-4 sm:mt-6 flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center">
+        <div class="flex-1">
+          <label for="menu"
+            class="block font-[Segoe_UI,sans-serif] font-semibold mb-1.5 min-[320px]:mb-2 sm:mb-2.5 text-[10px] min-[200px]:text-[11px] min-[240px]:text-xs min-[320px]:text-sm sm:text-base text-[#333] wrap-break-word">
+            Vista previa de los platos disponibles
+          </label>
+          <select id="menu" onchange="mostrarPlatos()" size="4"
+            class="w-full py-3 px-4 border-2 border-[#e0e0e0] rounded-xl text-[#222] text-base font-semibold shadow-sm outline-none transition-all duration-300 focus:border-[#5a3ec8] focus:shadow-[0_0_0_3px_rgba(90,62,200,0.1)] bg-white">
+            <option value="" disabled selected>Seleccione un plato del men&uacute;</option>
+            <option value="./img/entrecot.jpg">Entrecot de ternera con guarnici&oacute;n</option>
+            <option value="./img/macarrones.jpg">Macarrones al pesto</option>
+            <option value="./img/rissoto.jpg">Risotto cremoso a la parmesana</option>
+          </select>
+        </div>
+        <img id="fotoPlato"
+          class="hidden h-auto w-full sm:w-[200px] md:w-60 rounded-xl border-2 border-[#e0e0e0] shadow-md object-cover"
+          src="" alt="Foto del plato seleccionado">
+      </div>
+
+      <!-- Formulario de pedido -->
+      <form id="menuForm" class="mt-5 sm:mt-8">
+
+        <fieldset class="border-2 border-[#5a3ec8] rounded-2xl p-3 sm:p-5">
+          <legend
+            class="px-2 font-semibold text-base text-[#5a3ec8] wrap-break-word">
+            Por favor seleccione un plato de nuestro menú
+          </legend>
+          <div class="mt-2 space-y-2 sm:space-y-3">
+            <label
+              class="flex items-center gap-2 cursor-pointer text-[10px] min-[200px]:text-[11px] min-[240px]:text-xs min-[320px]:text-sm sm:text-base text-[#333] wrap-break-word">
+              <input class="accent-[#5a3ec8]" type="radio" name="plato" value="Entrecot de ternera con guarnición" id="entrecot" />
+              Entrecot de ternera con guarnici&oacute;n
+            </label>
+            <label
+              class="flex items-center gap-2 cursor-pointer text-[10px] min-[200px]:text-[11px] min-[240px]:text-xs min-[320px]:text-sm sm:text-base text-[#333] wrap-break-word">
+              <input class="accent-[#5a3ec8]" type="radio" name="plato" value="Macarrones al pesto" id="macarrones" />
+              Macarrones al pesto
+            </label>
+            <label
+              class="flex items-center gap-2 cursor-pointer text-[10px] min-[200px]:text-[11px] min-[240px]:text-xs min-[320px]:text-sm sm:text-base text-[#333] wrap-break-word">
+              <input class="accent-[#5a3ec8]" type="radio" name="plato" value="Risotto cremoso a la parmesana"
+                id="rissoto" />
+              Risotto cremoso a la parmesana
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="mt-4 sm:mt-6 border-2 border-[#5a3ec8] rounded-2xl p-3 sm:p-5">
+          <legend
+            class="px-2 font-semibold text-base text-[#5a3ec8] wrap-break-word">
+            Por favor indique sus preferencias e intolerancias
+          </legend>
+          <div class="mt-2 flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-6">
+            <label
+              class="flex items-center gap-2 cursor-pointer text-[10px] min-[200px]:text-[11px] min-[240px]:text-xs min-[320px]:text-sm sm:text-base text-[#333] wrap-break-word">
+              <input class="accent-[#5a3ec8]" type="checkbox" id="vegano" />
+              Vegano
+            </label>
+            <label
+              class="flex items-center gap-2 cursor-pointer text-[10px] min-[200px]:text-[11px] min-[240px]:text-xs min-[320px]:text-sm sm:text-base text-[#333] wrap-break-word">
+              <input class="accent-[#5a3ec8]" type="checkbox" id="gluten" />
+              Intolerancia al gluten
+            </label>
+            <label
+              class="flex items-center gap-2 cursor-pointer text-[10px] min-[200px]:text-[11px] min-[240px]:text-xs min-[320px]:text-sm sm:text-base text-[#333] wrap-break-word">
+              <input class="accent-[#5a3ec8]" type="checkbox" id="lactosa" />
+              Intolerancia a la lactosa
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="mt-5 sm:mt-8 flex flex-col items-center gap-3 sm:gap-6">
+          <div class="flex flex-col sm:flex-row w-full justify-center gap-3">
+            <button type="button" onclick="ordenarPedido()"
+              class="w-full sm:w-auto text-center rounded-xl px-6 py-3 font-semibold bg-linear-to-r from-[#6d5eea] to-[#7b6eea] text-white shadow-lg transition-all duration-300 ease-in-out cursor-pointer hover:from-[#f9eec0] hover:to-[#5a3ec8] hover:text-[#5a3ec8] hover:scale-105">
+              Ordenar
+            </button>
+            <button type="button" onclick="reiniciarFormulario()"
+                class="w-full sm:w-auto text-center rounded-xl px-6 py-3 font-semibold border-2 border-[#7b6eea] bg-white text-[#7b6eea] shadow transition-all duration-300 ease-in-out cursor-pointer hover:bg-linear-to-r hover:from-[#e3eafe] hover:to-[#7b6eea] hover:text-[#5a3ec8] hover:scale-105">
+              Reiniciar
+            </button>
+            <a href="index.html"
+                class="w-full sm:w-auto text-center rounded-xl px-6 py-3 font-semibold bg-linear-to-r from-[#6d5eea] to-[#7b6eea] text-white shadow-lg transition-all duration-300 ease-in-out cursor-pointer hover:from-[#f9eec0] hover:to-[#5a3ec8] hover:text-[#5a3ec8] hover:scale-105 flex items-center justify-center">
+              Volver a inicio
+            </a>
+          </div>
+          <p id="mensaje" class="hidden text-xl sm:text-2xl font-extrabold text-[#5a3ec8] tracking-wide text-center min-h-6"></p>
+        </div>
+
+      </form>
+    </section>
+
+  </main>
+
+  <script src="./js/restaurante.js"></script>
+  <script>
+    const ENTRECOT = document.querySelector('#entrecot');
+    const MACARRONES = document.querySelector('#macarrones');
+    const RISSOTO = document.querySelector('#rissoto');
+    const VEGANO = document.querySelector('#vegano');
+    const GLUTEN = document.querySelector('#gluten');
+    const LACTOSA = document.querySelector('#lactosa');
+    const MENSAJE = document.querySelector('#mensaje');
+
+    function pintarMensaje(texto, colorClass) {
+      MENSAJE.textContent = texto;
+      MENSAJE.className = `text-xl sm:text-2xl font-extrabold tracking-wide text-center min-h-6 ${colorClass}`;
+      MENSAJE.classList.remove('hidden');
+    }
+
+    function getPlatoSeleccionado() {
+      if (ENTRECOT.checked) return ENTRECOT.value;
+      if (MACARRONES.checked) return MACARRONES.value;
+      if (RISSOTO.checked) return RISSOTO.value;
+      return null;
+    }
+
+    function actualizarMensaje() {
+      const plato = getPlatoSeleccionado();
+      const vegano = VEGANO.checked;
+      const gluten = GLUTEN.checked;
+      const lactosa = LACTOSA.checked;
+
+      let incompatible = false;
+      let motivoIncompatibilidad = '';
+
+      if (ENTRECOT.checked && vegano) {
+        incompatible = true;
+        motivoIncompatibilidad = 'Entrecot de ternera con guarnición + vegano';
+      } else if (MACARRONES.checked && gluten) {
+        incompatible = true;
+        motivoIncompatibilidad = 'Macarrones al pesto + intolerancia al gluten';
+      } else if (RISSOTO.checked && lactosa) {
+        incompatible = true;
+        motivoIncompatibilidad = 'Risotto cremoso a la parmesana + intolerancia a la lactosa';
+      }
+
+      if (!plato) {
+        pintarMensaje('Por favor escoja un plato.', 'text-red-700');
+        console.log('Sin plato seleccionado.');
+      } else if (incompatible) {
+        pintarMensaje('Usted no puede comer este plato.', 'text-red-700');
+        console.log(`Incompatibilidad detectada: ${motivoIncompatibilidad}`);
+      } else {
+        const preferencias = [];
+        if (vegano) preferencias.push('vegano');
+        if (gluten) preferencias.push('intolerancia al gluten');
+        if (lactosa) preferencias.push('intolerancia a la lactosa');
+        const prefsTexto = preferencias.length ? preferencias.join(', ') : 'ninguna';
+        pintarMensaje('Ordenado, disfrute de su plato.', 'text-[#5a3ec8]');
+        console.log(`Plato seleccionado: ${plato}`);
+        console.log(`Preferencias/intolerancias: ${prefsTexto}`);
+      }
+    }
+
+    function reiniciarFormulario() {
+      document.querySelector('#menuForm').reset();
+      const foto = document.querySelector('#fotoPlato');
+      foto.src = '';
+      foto.classList.add('hidden');
+      foto.classList.remove('block');
+      MENSAJE.textContent = '';
+      MENSAJE.classList.add('hidden');
+      MENSAJE.classList.remove('text-red-700', 'text-[#5a3ec8]');
+      console.log('Formulario reiniciado.');
+    }
+
+    function ordenarPedido() {
+      actualizarMensaje();
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Número a letras</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" href="./img/array.png" type="image/x-icon">
+	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+	<style type="text/tailwindcss">
+		@import "tailwindcss";
+	</style>
+</head>
+
+<body class="min-h-screen font-[Outfit,Segoe_UI,Tahoma,Geneva,Verdana,sans-serif] text-[#222] bg-linear-to-br from-[#e3eafe] via-[#f9eec0] to-[#d1c4e9] relative overflow-x-hidden">
+	<main class="py-8 px-2 sm:py-16 sm:px-4 flex flex-col items-center relative z-10">
+		<h1 class="text-center text-2xl sm:text-4xl font-bold mb-4 tracking-tight leading-tight text-[#5a3ec8] drop-shadow-[0_2px_8px_rgba(0,0,0,0.15)] max-w-[900px] mx-auto">
+			Calcula tu nivel de experiencia
+		</h1>
+		<p class="mx-auto max-w-2xl text-center text-base sm:text-lg font-normal text-[#5a3ec8]">
+			3. Crea un programa que pida al usuario/a su nombre y los años de experiencia, y muestre su nivel: Principiante, Intermedio, Avanzado, Experto o Gurú.<br>
+			Usa funciones flecha y validación de datos.
+		</p>
+		<!-- Línea separadora -->
+
+		<!-- Tarjeta principal -->
+		<section class="mt-10 mx-auto w-full max-w-2xl bg-white/90 shadow-xl backdrop-blur-md rounded-3xl border border-[#b4b4c8]/20 px-8 py-8 flex flex-col items-center text-center">
+			<h2 class="font-semibold text-2xl mb-2 text-[#5a3ec8]">
+				Instrucciones
+			</h2>
+			<p class="text-[#7b6eea] text-base mb-4">Introduce tu nombre y los años de experiencia. El sistema te dirá tu nivel.</p>
+			<form id="nivelForm" onsubmit="event.preventDefault(); calcularNivel();">
+				<div class="mt-4 flex flex-col gap-4 sm:flex-row w-full max-w-md">
+					<div class="flex-1">
+						<label for="nombre" class="mb-2 block text-sm font-semibold text-[#333] sm:text-base">
+							Nombre
+						</label>
+						<input type="text" id="nombre" required
+							class="w-full rounded-md border-2 border-[#e0e0e0] px-4 py-3 text-sm text-[#333] shadow-sm outline-none transition-all duration-300 focus:border-[#a04500] focus:shadow-[0_0_0_3px_rgba(160,69,0,0.1)] sm:text-base">
+					</div>
+					<div class="flex-1">
+						<label for="anys" class="mb-2 block text-sm font-semibold text-[#333] sm:text-base">
+							Años de experiencia
+						</label>
+						<input type="number" id="anys" required min="0"
+							class="w-full rounded-md border-2 border-[#e0e0e0] px-4 py-3 text-sm text-[#333] shadow-sm outline-none transition-all duration-300 focus:border-[#a04500] focus:shadow-[0_0_0_3px_rgba(160,69,0,0.1)] sm:text-base">
+					</div>
+				</div>
+				<!-- Botones -->
+				<div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+					<button type="submit"
+						class="w-full sm:w-auto text-center rounded-xl px-6 py-3 font-semibold bg-linear-to-r from-[#6d5eea] to-[#7b6eea] text-white shadow-lg transition-all duration-300 ease-in-out cursor-pointer hover:from-[#f9eec0] hover:to-[#5a3ec8] hover:text-[#5a3ec8] hover:scale-105">
+						Calcular nivel
+					</button>
+					<button type="button" onclick="reiniciarNivel()"
+						class="w-full sm:w-auto text-center rounded-xl px-6 py-3 font-semibold border-2 border-[#7b6eea] bg-white text-[#7b6eea] shadow transition-all duration-300 ease-in-out cursor-pointer hover:bg-linear-to-r hover:from-[#e3eafe] hover:to-[#7b6eea] hover:text-[#5a3ec8] hover:scale-105">
+						Restaurar
+					</button>
+					<a href="index.html"
+						class="w-full sm:w-auto text-center rounded-xl px-6 py-3 font-semibold bg-linear-to-r from-[#6d5eea] to-[#7b6eea] text-white shadow-lg transition-all duration-300 ease-in-out cursor-pointer hover:from-[#f9eec0] hover:to-[#5a3ec8] hover:text-[#5a3ec8] hover:scale-105 flex items-center justify-center">
+						Volver a inicio
+					</a>
+				</div>
+			</form>
+			<!-- Resultado -->
+			<p id="resultado"
+				class="hidden min-h-6 text-center text-base font-semibold tracking-wide text-[#7b6eea] bg-[#e3eafe]/60 rounded-xl px-4 py-1 mt-1 sm:text-lg transition-all duration-300 max-w-[90%] mx-auto leading-relaxed">
+			</p>
+		</section>
+	</main>
+	<script src="js/nivel.js"></script>
+</body>
+</html>
