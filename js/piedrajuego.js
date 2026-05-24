@@ -1,4 +1,14 @@
-﻿
+﻿// Muestra mensaje antes de volver al inicio
+const mensajeSalir = (e) => {
+    e.preventDefault();
+    const resultado = document.getElementById('resultado');
+    resultado.innerHTML = 'Entiendo que no quieres jugar.';
+    resultado.classList.remove('hidden', 'text-[#7b6eea]');
+    resultado.classList.add('text-red-700');
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 1500);
+}
 const jugar = () => {
     const seleccionTexto = document.getElementById("seleccion").value.trim();
     const input = parseInt(seleccionTexto, 10);
